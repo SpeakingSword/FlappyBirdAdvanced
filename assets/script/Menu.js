@@ -50,7 +50,7 @@ cc.Class({
 
     // onLoad () {},
     onLoad: function () {
-        this.playButton.on("mousedown", function (event) {
+        this.playButton.on("touchstart", function (event) {
             console.log(this.playButton.name + " was pressed!");
         }, this);
 
@@ -63,7 +63,7 @@ cc.Class({
         }, this);
         */
 
-        this.exitButton.on("mousedown", function (event) {
+        this.exitButton.on("touchstart", function (event) {
             console.log(this.exitButton.name + "was pressed!");
 
         }, this);

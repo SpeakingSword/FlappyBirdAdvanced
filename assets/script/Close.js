@@ -40,8 +40,7 @@ cc.Class({
     onLoad: function () {
         this.node.on("touchstart", function (event) {
             this.target.active = this.target.active? false: true;
-        }, this);
-
+        }, this)
     },
 
     start () {
