@@ -8,6 +8,13 @@
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
+let DirectionType = {
+    Left: 0,
+    Right: 1
+}
+
+let DirectionValue = [-1, 1];
+
 cc.Class({
     extends: cc.Component,
 
@@ -28,51 +35,21 @@ cc.Class({
         //     }
         // },
 
-        playButton: {
-            default: null,
-            type: cc.Node
-        },
+        distance: 100,
 
-        /**
-        optionsButton: {
-            default: null,
-            type: cc.Node
-        },
-        */
+        speed: 1,
 
-        exitButton: {
-            default: null,
-            type: cc.Node
+        direction: {
+            default: DirectionType.Left,
+            type: cc.Enum(DirectionType)
         }
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {},
-    onLoad: function () {
-        this.playButton.on("touchstart", function (event) {
-            console.log(this.playButton.name + " was pressed!");
-        }, this);
-
-        /**
-        this.optionsButton.on("mousedown", function (event) {
-            console.log(this.optionsButton.name + " was pressed!" + " And it's parent is " + this.name);
-            let optionsBoard = this.node.getChildByName("OptionsBoard");
-            optionsBoard.active = optionsBoard.active? false: true;
-
-        }, this);
-        */
-
-        this.exitButton.on("touchstart", function (event) {
-            console.log(this.exitButton.name + "was pressed!");
-            /**
-            let bird = cc.find("Canvas/Bird");
-            let birdAnim = bird.getComponent(cc.Animation);
-            let birdAnimState = birdAnim.getAnimationState("bird_fly");
-            birdAnimState.speed = (birdAnimState.speed % 2)? 4: 1;
-            */
-
-        }, this);
+    onLoad () {
+        this.originX = this.node.x;
     },
 
     start () {
@@ -80,4 +57,24 @@ cc.Class({
     },
 
     // update (dt) {},
+    update: function (dt) {
+        //console.log(this.direction);
+        //console.log(DirectionType.Right);
+        /**
+        switch (this.direction) {
+            case DirectionType.Left:
+                this.node.x -= this.distance * dt * this.speed;
+                break;
+            case DirectionType.Right:
+                this.node.x += this.distance * dt * this.speed;
+                break;
+            default:
+                this.node.x -= this.distance * dt * this.speed;
+        }
+        */
+        this.node.x += DirectionValue[this.direction] * this.distance * dt * this.speed;    
+        let diff = Math.abs(this.originX - this.node.x);
+        if (diff > this.distance)
+            this.node.x = this.originX;
+    }
 });
