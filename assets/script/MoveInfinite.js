@@ -30,22 +30,18 @@ cc.Class({
         //     }
         // },
 
-        distance: 100,
-
         speed: 1,
 
         direction: {
-            default: mDirection.directionType.left,
+            default: mDirection.directionType.right,
             type: cc.Enum(mDirection.directionType)
         }
+        
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {},
-    onLoad () {
-        this.originX = this.node.x;
-    },
 
     start () {
 
@@ -53,14 +49,6 @@ cc.Class({
 
     // update (dt) {},
     update: function (dt) {
-       this.node.x += mDirection.directionValue[this.direction] * this.distance * dt * this.speed;    
-       this.checkPos();
-       
-    },
-
-    checkPos: function () {
-        let diff = Math.abs(this.originX - this.node.x);
-        if (diff > this.distance)
-            this.node.x = this.originX;
+        this.node.x += mDirection.directionValue[this.direction] * dt * this.speed;
     }
 });
