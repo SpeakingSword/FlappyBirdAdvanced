@@ -8,8 +8,6 @@
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
-const mDirection = require("./Direction");
-
 cc.Class({
     extends: cc.Component,
 
@@ -30,24 +28,29 @@ cc.Class({
         //     }
         // },
 
-        speed: 1,
-
-        direction: {
-            default: mDirection.directionType.right,
-            type: cc.Enum(mDirection.directionType)
+        bird: {
+            default: null,
+            type: cc.Node
         }
-        
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {},
+    onLoad: function () {
+        this.node.on("touchstart", function () {
+            //console.log(this.node.name + " was pressed!");
+            let bird = this.bird.getComponent("Bird");
+            bird.drop.stop();
+            bird.jump = bird.setJumpAction();
+            bird.node.runAction(bird.jump);
+
+        }, this);
+    },
 
     start () {
 
     },
 
-    moveAuto: function (dt) {
-        this.node.x += mDirection.directionValue[this.direction] * dt * this.speed;
-    }
+    // update (dt) {},
 });

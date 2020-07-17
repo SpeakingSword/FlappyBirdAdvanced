@@ -51,11 +51,8 @@ cc.Class({
 
     },
 
-    // update (dt) {},
-    update: function (dt) {
-       this.node.x += mDirection.directionValue[this.direction] * this.distance * dt * this.speed;    
-       this.checkPos();
-       
+    moveAuto: function (dt) {
+        this.node.x += mDirection.directionValue[this.direction] * this.distance * dt * this.speed;
     },
 
     checkPos: function () {
