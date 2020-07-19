@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "BasicPipe",
+    "_name": "PipeWithMedal",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -22,20 +22,23 @@
       },
       {
         "__id__": 6
+      },
+      {
+        "__id__": 10
       }
     ],
     "_active": true,
     "_level": 1,
     "_components": [
       {
-        "__id__": 10
+        "__id__": 14
       },
       {
-        "__id__": 11
+        "__id__": 15
       }
     ],
     "_prefab": {
-      "__id__": 12
+      "__id__": 16
     },
     "_opacity": 255,
     "_color": {
@@ -203,9 +206,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "998d16aa-3b78-427d-8859-dca7aea80e22"
+      "__uuid__": "1bf5e2b3-8af3-43e5-9108-dac13a269f6b"
     },
-    "fileId": "c3AU5K7C9JsKP8Fu9Y+wLi",
+    "fileId": "a1PqA1i+xAYbvh50jW3etA",
     "sync": false
   },
   {
@@ -332,21 +335,133 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "998d16aa-3b78-427d-8859-dca7aea80e22"
+      "__uuid__": "1bf5e2b3-8af3-43e5-9108-dac13a269f6b"
     },
-    "fileId": "e6GNd7Fh5Lg4DwDxcABO3L",
+    "fileId": "21/RevlNdI/YUygSz2dEL2",
     "sync": false
   },
   {
-    "__type__": "b5b50i+MxRIlL8Lc5WzwP0V",
+    "__type__": "cc.Node",
+    "_name": "Medal",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_active": true,
+    "_level": 3,
+    "_components": [
+      {
+        "__id__": 11
+      },
+      {
+        "__id__": 12
+      }
+    ],
+    "_prefab": {
+      "__id__": 13
+    },
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 44,
+      "height": 43
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 0.6,
+      "y": 0.6,
+      "z": 1
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "groupIndex": 3,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 1
+      "__id__": 10
     },
     "_enabled": true,
-    "maxIncrease": 150,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "6b958ef0-1e84-405c-8822-c227086a8a83"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": null,
     "_id": ""
+  },
+  {
+    "__type__": "cc.CircleCollider",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 10
+    },
+    "_enabled": true,
+    "tag": 0,
+    "_offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_radius": 23,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "1bf5e2b3-8af3-43e5-9108-dac13a269f6b"
+    },
+    "fileId": "15Ry2i8DNE/ZG18vGlUs9A",
+    "sync": false
   },
   {
     "__type__": "8439eLutWJEWpe4oBh8G5fc",
@@ -361,14 +476,26 @@
     "_id": ""
   },
   {
+    "__type__": "d9e6a5BV9pEkLJhOp0XYmAc",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "maxIncrease": 150,
+    "maxMedalOffset": 80,
+    "_id": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "998d16aa-3b78-427d-8859-dca7aea80e22"
+      "__uuid__": "1bf5e2b3-8af3-43e5-9108-dac13a269f6b"
     },
-    "fileId": "b4YeuVI55FLqpx1VX2LR3F",
+    "fileId": "6b2JDUoS1D+IKro6j/cpC/",
     "sync": false
   }
 ]

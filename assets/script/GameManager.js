@@ -1,32 +1,8 @@
-// Learn cc.Class:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://docs.cocos2d-x.org/creator/manual/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://docs.cocos2d-x.org/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
 
         collision: true,
         collisionDebug: false,
@@ -34,6 +10,16 @@ cc.Class({
         controlPad: {
             default: null,
             type: cc.Node
+        },
+
+        scoreText: {
+            default: null,
+            type: cc.Label
+        },
+
+        overPassText: {
+            default: null,
+            type: cc.Label
         },
 
         bird: {
@@ -45,9 +31,6 @@ cc.Class({
         produceInterval: 1
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {},
     onLoad: function () {
         this.initiateGame();
         this.producePosX = cc.find("Canvas").width / 2 + 30;
@@ -60,9 +43,11 @@ cc.Class({
         this.producePipe();
     },
 
-    // update (dt) {},
     update: function (dt) {
         if (!this.gameStop && !this.gameOver) {
+            if (!this.controlPad.active) {
+                this.controlPad.active = true;
+            }
             // 背景和地板循环移动
             let backgrounds = this.backgroundsNode.children;
             let lands = this.landsNode.children;
@@ -90,14 +75,20 @@ cc.Class({
             this.timer += dt;
         }
         else {
+            // 游戏暂停和游戏失败时禁止玩家操作
             if (this.controlPad.active) {
                 this.controlPad.active = false;
             }
+
+            // 停止小鸟的所有动画
+            this.bird.stopAllActions();
         }
     },
 
     producePipe: function () {
-        let newPipe = cc.instantiate(this.pipePrefab[0]);
+        let index = this.getPrefabIndex();
+        //console.log("index: " + index);
+        let newPipe = cc.instantiate(this.pipePrefab[index]);
         newPipe.x = this.producePosX;
         this.pipesNode.addChild(newPipe, 1, "BasicNode");
     },
@@ -106,10 +97,43 @@ cc.Class({
         this.gameStop = false;
         this.gameOver = false;
         this.timeFrozen = false;
+        this.overPassPipe = 0;
+        this.score = 0;
         this.timer = 0;
         let collisionManager = cc.director.getCollisionManager();
         collisionManager.enabled = this.collision;
         collisionManager.enabledDebugDraw = this.collisionDebug;
+    },
+
+    getPrefabIndex: function () {
+        //console.log("prefab num: " + this.pipePrefab.length);
+        let index = Math.floor(Math.random() * this.pipePrefab.length);
+        return index;
+    },
+
+    finishGame: function () {
+        this.gameOver = true;
+        cc.find("Canvas/GameOver").active = true;
+    },
+
+    pauseGame: function () {
+        this.gameStop = true;
+        cc.find("Canvas/PauseBoard").active = true;
+    },
+
+    resumeGame: function () {
+        cc.find("Canvas/PauseBoard").active = false;
+        this.gameStop = false;
+    },
+
+    increaseScore: function () {
+        this.score += 1;
+        this.scoreText.string = this.score;
+    },
+
+    increaseOverPassPipe: function () {
+        this.overPassPipe += 1;
+        this.overPassText.string = this.overPassPipe;
     }
 
 });
