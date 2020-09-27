@@ -28,5 +28,5 @@ cc.Class({
         let diff = Math.abs(this.originX - this.node.x);
         if (diff > this.distance)
             this.node.x = this.originX;
-    }
+    },
 });

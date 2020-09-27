@@ -17,5 +17,5 @@ cc.Class({
 
     moveAuto: function (dt) {
         this.node.x += mDirection.directionValue[this.direction] * dt * this.speed;
-    }
+    },
 });

@@ -1,3 +1,4 @@
+const gameSetting = require("GameSetting");
 
 cc.Class({
     extends: cc.Component,
@@ -33,6 +34,7 @@ cc.Class({
 
     onLoad: function () {
         this.initiateGame();
+        
         this.producePosX = cc.find("Canvas").width / 2 + 30;
         this.pipesNode = cc.find("Canvas/Pipes");
         this.backgroundsNode = cc.find("Canvas/Backgrounds");
@@ -54,16 +56,16 @@ cc.Class({
             for (let i = 0; i < backgrounds.length; ++i) {
                 let bgScript = backgrounds[i].getComponent("Loop");
                 let landScript = lands[i].getComponent("Loop");
-                bgScript.moveAuto(dt);
+                bgScript.moveAuto(dt * this.speed);
                 bgScript.checkPos();
-                landScript.moveAuto(dt);
+                landScript.moveAuto(dt * this.speed);
                 landScript.checkPos();
             }
 
             // 移动管道
             let pipes = this.pipesNode.children;
             for (let i = 0; i < pipes.length; ++i) {
-                pipes[i].getComponent("MoveInfinite").moveAuto(dt);
+                pipes[i].getComponent("MoveInfinite").moveAuto(dt * this.speed);
             }
 
             // 按照时间间隔持续制造新的管道
@@ -72,7 +74,7 @@ cc.Class({
                 this.timer = 0;
             }
 
-            this.timer += dt;
+            this.timer += dt * this.speed;
         }
         else {
             // 游戏暂停和游戏失败时禁止玩家操作
@@ -87,7 +89,6 @@ cc.Class({
 
     producePipe: function () {
         let index = this.getPrefabIndex();
-        //console.log("index: " + index);
         let newPipe = cc.instantiate(this.pipePrefab[index]);
         newPipe.x = this.producePosX;
         this.pipesNode.addChild(newPipe, 1, "BasicNode");
@@ -100,14 +101,16 @@ cc.Class({
         this.overPassPipe = 0;
         this.score = 0;
         this.timer = 0;
+        this.difficulty = gameSetting.getDifficulty();
+        this.speed = Math.log1p(this.difficulty);
         let collisionManager = cc.director.getCollisionManager();
         collisionManager.enabled = this.collision;
         collisionManager.enabledDebugDraw = this.collisionDebug;
     },
 
     getPrefabIndex: function () {
-        //console.log("prefab num: " + this.pipePrefab.length);
-        let index = Math.floor(Math.random() * this.pipePrefab.length);
+        let index = Math.floor(Math.random() * (this.difficulty+1));
+        if (index > 3) index = 3;
         return index;
     },
 

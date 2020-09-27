@@ -15,9 +15,9 @@ cc.Class({
     },
 
     initiateStabs: function () {
-        this.stabDown = this.node.getChildByName("StabDown");
-        this.stabUp = this.node.getChildByName("StabUp");
-        this.stabDown.y = this.pipeDown.y - this.pipeDown.height / 2;
-        this.stabUp.y  = this.pipeUp.y + this.pipeUp.height / 2;
+        this.downStabs = this.node.getChildByName("downStabs");
+        this.upStabs = this.node.getChildByName("upStabs");
+        this.downStabs.y = this.pipeDown.y - this.pipeDown.height / 2;
+        this.upStabs.y  = this.pipeUp.y + this.pipeUp.height / 2;
     }
 });

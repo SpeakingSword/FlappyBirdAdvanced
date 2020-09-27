@@ -26,20 +26,20 @@ cc.Class({
         // 注册三个按钮的回调
         this.easyButton.on("touchstart", function (event) {
             console.log(this.easyButton.name + " was pressed!");
-            gameSetting.setDifficulty(0);
+            gameSetting.setDifficulty(1);
             this.easyButton.color = cc.color(248, 156, 46, 255);
             console.log("difficulty: " + gameSetting.getDifficulty());
         }, this);
 
         this.mediumButton.on("touchstart", function (event) {
             console.log(this.mediumButton.name + " was pressed!");
-            gameSetting.setDifficulty(1);
+            gameSetting.setDifficulty(2);
             console.log("difficulty: " + gameSetting.getDifficulty());
         }, this);
 
         this.hardButton.on("touchstart", function () {
             console.log(this.hardButton.name + " was pressed!");
-            gameSetting.setDifficulty(2);
+            gameSetting.setDifficulty(3);
             console.log("difficulty: " + gameSetting.getDifficulty());
         }, this);
 
@@ -58,13 +58,13 @@ cc.Class({
         hardTxt.color = cc.Color.WHITE;
 
         switch (gameSetting.getDifficulty()) {
-            case 0:
+            case gameSetting.difficultyType.easy:
                 easyTxt.color = cc.color(248, 156, 46, 255);
                 break;
-            case 1:
+            case gameSetting.difficultyType.medium:
                 mediumTxt.color = cc.color(248, 156, 46, 255);
                 break;
-            case 2:
+            case gameSetting.difficultyType.hard:
                 hardTxt.color = cc.color(248, 156, 46, 255);
                 break;
             default:
